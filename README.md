@@ -8,15 +8,15 @@ Dokumentasi implementasi, administrasi jaringan, dan pengujian konektivitas pada
 
 ## 📌 Ringkasan Sistem & Jaringan
 
-| Parameter | Konfigurasi / Spesifikasi |
-|---|---|
-| **Sistem Operasi** | Ubuntu Server 22.04 LTS (Non-GUI / Headless) |
-| **Virtualisasi** | Oracle VirtualBox |
-| **Antarmuka Jaringan** | `enp0s3` (Internal Network: `lan-kantor`) |
-| **Metode Alokasi IP** | DHCP Client (Otomatis dari MikroTik Gateway) |
-| **Alamat IP Diperoleh** | `192.168.10.253/24` |
-| **Default Gateway** | `192.168.10.1` (MikroTik ether2) |
-| **DNS Resolver** | `8.8.8.8` (Google Public DNS via DHCP) |
+| Parameter               | Konfigurasi / Spesifikasi                    |
+| ----------------------- | -------------------------------------------- |
+| **Sistem Operasi**      | Ubuntu Server 22.04 LTS (Non-GUI / Headless) |
+| **Virtualisasi**        | Oracle VirtualBox                            |
+| **Antarmuka Jaringan**  | `enp0s3` (Internal Network: `lan-kantor`)    |
+| **Metode Alokasi IP**   | DHCP Client (otomatis dari MikroTik Gateway) |
+| **Alamat IP Diperoleh** | `192.168.10.253/24`                          |
+| **Default Gateway**     | `192.168.10.1` (MikroTik ether2)             |
+| **DNS Resolver**        | `8.8.8.8` (Google Public DNS via DHCP)       |
 
 ---
 
@@ -32,26 +32,41 @@ Dokumentasi implementasi, administrasi jaringan, dan pengujian konektivitas pada
 ## 🧪 Hasil Pengujian & Verifikasi
 
 ### 1. Verifikasi Alokasi IP Address
+
 Sistem berhasil mendapatkan konfigurasi IP dinamis dan gateway dari router MikroTik:
+
 ![IP Address Verification](docs/screenshots/ip-address.png)
 
 ### 2. Uji Konektivitas & Resolusi DNS
+
 Pengujian konektivitas menggunakan perintah ICMP ping ke domain `google.com` dengan tingkat keberhasilan 100%:
+
 ![Ping DNS Test](docs/screenshots/ping-test.png)
 
 ```text
 14 packets transmitted, 14 received, 0% packet loss, time 13022ms
 rtt min/avg/max/mdev = 30.947/34.043/39.927/2.841 ms
+```
 
 ### 3. Pengujian Throughput & Download
+
 Pengujian transfer paket data besar dari server eksternal menggunakan utility CLI:
-![Image](docs/screenshots/throughput-test.png)
+
+![Throughput Test](docs/screenshots/throughput-test.png)
+
+---
 
 ## 📌 Catatan Analisis & Troubleshooting Linux
-1. **Manajemen DNS Resolver di Ubuntu: Mengamati fungsi systemd-resolved dalam menangani query nama domain lokal dan publik.
-2. **Pentingnya FQDN pada CLI: Menemukan bahwa perintah ping google menghasilkan error Temporary failure in name resolution karena resolver membutuhkan nama domain lengkap (google.com).
-3. **Analisis Case-Sensitivity HTTP: Mengamati respon web server di mana 10mb.zip mengembalikan kode status HTTP 404 Not Found, sedangkan 10MB.zip berhasil diunduh dengan kode HTTP 200 OK.
+
+1. **Manajemen DNS Resolver di Ubuntu:** Mengamati fungsi `systemd-resolved` dalam menangani query nama domain lokal maupun publik.
+2. **Pentingnya FQDN pada CLI:** Menemukan bahwa perintah `ping google` menghasilkan error `Temporary failure in name resolution` karena resolver membutuhkan nama domain lengkap (`google.com`).
+3. **Analisis Case-Sensitivity HTTP:** Mengamati respon web server di mana `10mb.zip` mengembalikan kode status `404 Not Found`, sedangkan `10MB.zip` berhasil diunduh dengan kode status `200 OK`.
+
+---
 
 ## 👤 Penulis
-Naufal Naazhir Arkaan
-Email: naufaljpr9@gmail.com
+
+- **Nama:** Naufal Naazhir Arkaan
+- **Email:** naufaljpr9@gmail.com
+
+---
